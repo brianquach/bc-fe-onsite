@@ -10,13 +10,19 @@
 			<h1>Projects</h1>
 		</header>
 		<main>
-			<input id="projectName" type="text" placeholder="Project name">
-			<button id="projectCreate">
-				Create Project
-			</button>
-			<ul id="projectList">
-			</ul>
+			<section id="projectAdminView">
+				<input id="projectName" type="text" placeholder="Project name">
+				<button id="projectCreate">
+					Create Project
+				</button>
+				<ul id="projectList">
+				</ul>
+			</section>
+			<section id="projectFileView" class="project-file-view">
+				<h2></h2>
+			</section>
 		</main>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="/dist/app.js"></script>
 	</body>
