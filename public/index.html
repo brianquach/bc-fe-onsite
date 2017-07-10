@@ -16,7 +16,7 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-md-4">
-							<input id="projectName" class="project-name-input" type="text" placeholder="Project name">
+							<input id="projectName" class="input-text" type="text" placeholder="Project name">
 						</div>
 						<div class="col-md-2">
 							<button id="projectCreate" class="btn btn-primary">
@@ -35,21 +35,45 @@
 
 			<!-- Project detail view (files) -->
 			<section id="projectFileView" class="project-file-view">
-				<h2 id="projectFileViewName"></h2>
-				<input id="folderName" type="text" placeholder="Folder name">
-				<button id="newFolderBtn">
-					New Folder
-				</button>
-				<form id="form">
-					<input id="fileUpload" type="file" name="file">
-					<input type="submit" value="Upload Files">
-				</form>
-				<a id="backBtn" href="javascript:void(0)">Back</a>
-				<ul id="directory">
-				</ul>
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-3">
+							<h2 id="projectFileViewName"></h2>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-2">
+							<input id="folderName" class="input-text" type="text" placeholder="Folder name">
+						</div>
+						<div class="col-md-2">
+							<button id="newFolderBtn" class="btn btn-primary">
+								New Folder
+							</button>
+						</div>
+						<form id="form">
+							<div class="col-md-2">
+								<input id="fileUpload" type="file" name="file">
+							</div>
+							<div class="col-md-2">
+								<input type="submit" class="btn btn-primary" value="Upload Files">
+							</div>
+						</form>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<ul id="directory" class="file-directory">
+							</ul>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-3">
+							<a id="backBtn" href="javascript:void(0)">Back</a>
+						</div>
+					</div>
+				</div>
 			</section>
 		</main>
-		
+
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="/dist/app.js"></script>
 	</body>
