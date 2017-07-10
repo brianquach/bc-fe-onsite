@@ -154,6 +154,9 @@ var projectView = (function() {
     $backBtn.on('click', function() {
       $projectAdminView.removeClass('hide');
       $projectFileView.removeClass('show');
+
+      $directory.html('');
+      $fileUpload.val('');
     });
 
     $form.on('submit', function(event) {
