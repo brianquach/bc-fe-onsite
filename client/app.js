@@ -51,7 +51,6 @@ var fileModel = (function() {
     data.append('size', file.size);
 
     var url = `${baseUrl}?projectId=${projectId}&parentId=${parentId}`;
-    console.log(projectId, parentId, file, url);
     return $.ajax({
       url: url,
       method: 'POST',
@@ -140,6 +139,7 @@ var projectView = (function() {
   var $projectName;
   var $fileUpload;
   var $newFolderBtn;
+  var $directory;
 
   function init() {
     $projectAdminView = $('#projectAdminView');
@@ -149,6 +149,7 @@ var projectView = (function() {
     $form = $('#form');
     $newFolderBtn = $('#newFolderBtn');
     $fileUpload = $('#fileUpload');
+    $directory = $('#directory');
 
     $backBtn.on('click', function() {
       $projectAdminView.removeClass('hide');
@@ -159,8 +160,9 @@ var projectView = (function() {
       var projectId = $form.data('projectId');
       var files = $fileUpload[0].files;
       fileModel.create(projectId, files[0])
-        .done(function(resp) {
-          console.log(resp);
+        .done(function(file) {
+          renderFileItem($directory, file);
+          $fileUpload.val('');
         });
 
       return false;
@@ -176,12 +178,22 @@ var projectView = (function() {
     $projectName.text(project.name);
     fileModel.get(project.id)
       .done(function(files) {
-        renderDirectory(files);
+        renderDirectory($directory, files);
       });
   }
 
-  function renderDirectory(files) {
+  function renderDirectory($parentFolder, files) {
+    files.forEach(function(file) {
+      renderFileItem($parentFolder, file);
+    });
+  }
 
+  function renderFileItem($parentFolder, file) {
+    var $li = $('<li>');
+    var info = `Name: ${file.name} Size: ${file.size} bytes`;
+    $li.text(info);
+    $li.addClass((file.type === 'FILE') ? 'file' : 'folder');
+    $parentFolder.append($li);
   }
 
   return {
