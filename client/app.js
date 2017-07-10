@@ -67,7 +67,32 @@ var fileModel = (function() {
 })();
 
 var folderModel = (function() {
+  'use strict';
 
+  var baseUrl = '/api/folders';
+
+  function create(projectId, name, parentId) {
+    parentId = parentId || projectId;
+
+    if (name.trim() === '') {
+      throw new Error('Name required');
+    }
+
+    var url = `${baseUrl}?projectId=${projectId}&parentId=${parentId}`;
+    return $.ajax({
+      url: url,
+      method: 'POST',
+      data: JSON.stringify({
+        name: name
+      }),
+      processData: false,
+      contentType: 'application/json; charset=utf-8'
+    });
+  }
+
+  return {
+    create: create
+  }
 })();
 
 var project = (function() {
@@ -139,6 +164,7 @@ var projectView = (function() {
   var $projectName;
   var $fileUpload;
   var $newFolderBtn;
+  var $folderName;
   var $directory;
 
   function init() {
@@ -150,6 +176,7 @@ var projectView = (function() {
     $newFolderBtn = $('#newFolderBtn');
     $fileUpload = $('#fileUpload');
     $directory = $('#directory');
+    $folderName = $('#folderName');
 
     $backBtn.on('click', function() {
       $projectAdminView.removeClass('hide');
@@ -157,6 +184,7 @@ var projectView = (function() {
 
       $directory.html('');
       $fileUpload.val('');
+      $folderName.val('');
     });
 
     $form.on('submit', function(event) {
@@ -172,7 +200,12 @@ var projectView = (function() {
     });
 
     $newFolderBtn.on('click', function(event) {
-      console.log('create new folder');
+      var projectId = $form.data('projectId');
+      var name = $folderName.val();
+      folderModel.create(projectId, name)
+        .done(function(folder) {
+          renderFileItem($directory, folder);
+        });
     });
   }
 
@@ -193,9 +226,15 @@ var projectView = (function() {
 
   function renderFileItem($parentFolder, file) {
     var $li = $('<li>');
-    var info = `Name: ${file.name} Size: ${file.size} bytes`;
-    $li.text(info);
-    $li.addClass((file.type === 'FILE') ? 'file' : 'folder');
+    var $a = $('<a href="javascript:void(0)">')
+    var info = [`Name: ${file.name}`];
+    if (file.size) {
+      info.push(`Size: ${file.size}`);
+    }
+    info = info.join(' ');
+    $a.text(info)
+    $li.append($a);
+    $li.addClass(file.type.toLowerCase());
     $parentFolder.append($li);
   }
 
