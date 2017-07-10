@@ -7,18 +7,30 @@
 	</head>
 
 	<body>
-		<header>
+		<header class="page-header">
 			<h1>Projects</h1>
 		</header>
-		<main>
+		<main class="content">
 			<!-- Project admin view (create/select) -->
 			<section id="projectAdminView">
-				<input id="projectName" type="text" placeholder="Project name">
-				<button id="projectCreate">
-					Create Project
-				</button>
-				<ul id="projectList">
-				</ul>
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-4">
+							<input id="projectName" class="project-name-input" type="text" placeholder="Project name">
+						</div>
+						<div class="col-md-2">
+							<button id="projectCreate" class="btn btn-primary">
+								Create Project
+							</button>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<ul id="projectList" class="project-list">
+							</ul>
+						</div>
+					</div>
+				</div>
 			</section>
 
 			<!-- Project detail view (files) -->
