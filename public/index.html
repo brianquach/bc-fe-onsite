@@ -10,6 +10,7 @@
 			<h1>Projects</h1>
 		</header>
 		<main>
+			<!-- Project admin view (create/select) -->
 			<section id="projectAdminView">
 				<input id="projectName" type="text" placeholder="Project name">
 				<button id="projectCreate">
@@ -18,10 +19,23 @@
 				<ul id="projectList">
 				</ul>
 			</section>
+
+			<!-- Project detail view (files) -->
 			<section id="projectFileView" class="project-file-view">
-				<h2></h2>
+				<h2 id="projectFileViewName"></h2>
+				<button id="newFolderBtn">
+					New Folder
+				</button>
+				<form id="form">
+					<input id="fileUpload" type="file" name="file">
+					<input type="submit" value="Upload Files">
+				</form>
+				<a id="backBtn" href="javascript:void(0)">Back</a>
 			</section>
 		</main>
+		<script id="projectFileViewDetail" type="text/javascript">
+
+		</script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="/dist/app.js"></script>
